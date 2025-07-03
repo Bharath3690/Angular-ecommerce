@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
 })
 export class ProductListComponent implements OnInit {
   products: any[] = [];
+  addedProductId: number | null = null;
 
   constructor(private productService: ProductService, private cartService: CartService) {}
 
@@ -20,6 +21,9 @@ export class ProductListComponent implements OnInit {
 
   addToCart(product: any): void {
     this.cartService.addToCart(product);
-    alert(`${product.title} added to cart!`);
+    this.addedProductId = product.id;
+    setTimeout(() => {
+      this.addedProductId = null;
+    }, 2000); // Hide message after 2 seconds
   }
 }

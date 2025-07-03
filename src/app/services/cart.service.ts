@@ -28,4 +28,22 @@ export class CartService {
     this.cart = this.cart.filter(cartItem => cartItem.id !== item.id);
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
+
+  increaseQuantity(item: any): void {
+    const existingItem = this.cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+    }
+  }
+
+  decreaseQuantity(item: any): void {
+    const existingItem = this.cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem && existingItem.quantity > 1) {
+      existingItem.quantity -= 1;
+      localStorage.setItem('cart', JSON.stringify(this.cart));
+    } else if (existingItem && existingItem.quantity === 1) {
+      this.removeFromCart(item);
+    }
+  }
 }
