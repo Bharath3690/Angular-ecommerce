@@ -1,0 +1,13 @@
+<header class="bg-blue-600 text-white p-4 shadow-md">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">E-Shop</h1>
+    <nav>
+      <a routerLink="/" class="mx-2 hover:underline">Home</a>
+      <a routerLink="/products" class="mx-2 hover:underline">Products</a>
+      <a routerLink="/cart" class="mx-2 hover:underline">Cart ({{ cartService.getCartItemCount() }})</a>
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/login" class="mx-2 hover:underline">Login</a>
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/signup" class="mx-2 hover:underline">Sign Up</a>
+      <button *ngIf="authService.isLoggedIn()" (click)="authService.logout()" class="mx-2 hover:underline">Logout</button>
+    </nav>
+  </div>
+</header>
